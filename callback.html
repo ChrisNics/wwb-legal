@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why We Believed Publisher - Connecting</title>
+<style>
+  :root { --bg:#f7f3ea; --fg:#231c14; --muted:#6b5f50; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#17130e; --fg:#ece3d3; --muted:#b2a48f; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:17px/1.6 Georgia, serif; padding:48px max(16px, env(safe-area-inset-left)); }
+  main { max-width:620px; margin:0 auto; }
+  code { word-break:break-all; font-size:14px; color:var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Connecting to Why We Believed Publisher…</h1>
+  <p id="msg">Handing the TikTok authorization back to the publisher on this computer.</p>
+  <p><code id="raw"></code></p>
+</main>
+<script>
+  // TikTok redirects here (it does not allow localhost). Forward the code to the local publish.py listener.
+  var q = location.search;
+  if (q) {
+    location.replace("http://localhost:8765/callback" + q);
+    setTimeout(function () {
+      document.getElementById("msg").textContent =
+        "If nothing happened, make sure publish.py setup-tiktok is running, then refresh this page.";
+      document.getElementById("raw").textContent = location.href;
+    }, 4000);
+  } else {
+    document.getElementById("msg").textContent = "This page is only used during TikTok sign-in.";
+  }
+</script>
+</body>
+</html>
